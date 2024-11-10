@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Section</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="/photos/logo.png" alt="WheelXpress Logo">
+            <span class="navbar-brand">WheelXpress</span>
+        </div>
+        
+        <!-- Toggle Button for Mobile -->
+        <div class="navbar-toggle" id="navbarToggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    
+        <!-- Navbar Menu -->
+         
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="/Client Panel/index.html" class="navbar-item">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/Client Panel/availability/index.html" class="navbar-item">
+                <i class="fas fa-car-side"></i>
+                <span>Availability</span>
+            </a>
+            <a href="/Client Panel/bookings/index.html" class="navbar-item">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Booking</span>
+            </a>
+            <a href="/Client Panel/map/index.html" class="navbar-item">
+                <i class="fa-solid fa-map"></i>
+                <span>Map</span>
+            </a>
+            <a href="/Client Panel/support/index.html" class="navbar-item">
+                <i class="fas fa-info-circle"></i>
+                <span>Support</span>
+            </a>
+            <a href="./index.html" class="navbar-item">
+                <i class="fa-regular fa-id-badge"></i>
+                <span>Profile</span>
+            </a>
+            
+            <a href="/Client Panel/login_page/index.html" class="navbar-item">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+            </a>
+            
+           
+           
+            
+        </div>
+    </nav>
+
+<div class="profile-section">
+    <h2>User Profile & Preferences</h2>
+
+    <div class="profile-container">
+        <!-- Personal Information -->
+        <div class="profile-card">
+            <h3>Personal Information</h3>
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="John Doe">
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="example@example.com">
+            
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" placeholder="123-456-7890">
+            
+            <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+        </div>
+
+        <!-- Preferred Vehicle Types -->
+        <div class="profile-card">
+            <h3>Preferred Vehicle Types</h3>
+            <select id="preferredVehicle" multiple>
+                <option value="bike">Bike</option>
+                <option value="car">Car</option>
+                <option value="scooter">Scooter</option>
+                <option value="electric">Electric</option>
+            </select>
+            <button class="save-btn" onclick="savePreferences()">Save Preferences</button>
+        </div>
+
+        <!-- Saved Payment Methods -->
+        <div class="profile-card">
+            <h3>Payment Methods</h3>
+            <ul id="paymentMethodsList">
+                <!-- Dynamically populated -->
+            </ul>
+            <button class="add-new" onclick="addPaymentMethod()">Add New Payment Method</button>
+        </div>
+
+        <!-- Saved Addresses -->
+        <div class="profile-card">
+            <h3>Saved Addresses</h3>
+            <ul id="addressList">
+                <!-- Dynamically populated -->
+            </ul>
+            <button class="add-new" onclick="addAddress()">Add New Address</button>
+        </div>
+    </div>
+</div>
+
+  <!-- Scroll-to-top arrow -->
+  <div id="scrollToTop" class="scroll-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+      
+  
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <h3>WheelXpress</h3>
+        </div>
+        <div class="footer-links">
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <ul>
+                <li><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 WheelXpress. All rights reserved.</p>
+    </div>
+  </footer>
+  
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Booking Section</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="/photos/logo.png" alt="WheelXpress Logo">
+            <span class="navbar-brand">WheelXpress</span>
+        </div>
+        
+        <!-- Toggle Button for Mobile -->
+        <div class="navbar-toggle" id="navbarToggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    
+        <!-- Navbar Menu -->
+         
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="/Client Panel/index.html" class="navbar-item">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/Client Panel/availability/index.html" class="navbar-item">
+                <i class="fas fa-car-side"></i>
+                <span>Availability</span>
+            </a>
+            <a href="./index.html" class="navbar-item">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Booking</span>
+            </a>
+            <a href="/Client Panel/map/index.html" class="navbar-item">
+                <i class="fa-solid fa-map"></i>
+                <span>Map</span>
+            </a>
+            <a href="/Client Panel/support/index.html" class="navbar-item">
+                <i class="fas fa-info-circle"></i>
+                <span>Support</span>
+            </a>
+            <a href="/Client Panel/profile/index.html" class="navbar-item">
+                <i class="fa-regular fa-id-badge"></i>
+                <span>Profile</span>
+            </a>
+            
+            <a href="/Client Panel/login_page/index.html" class="navbar-item">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+            </a>
+            
+           
+           
+            
+        </div>
+    </nav>
+
+<div class="booking-section">
+    <!-- Booking Summary -->
+    <div class="booking-summary">
+        <h2>Booking Overview</h2>
+        <div class="summary-cards">
+            <div class="summary-card">
+                <p>Total Bookings</p>
+                <h3 id="totalBookings">10</h3>
+            </div>
+            <div class="summary-card">
+                <p>Completed</p>
+                <h3 id="completedBookings">6</h3>
+            </div>
+            <div class="summary-card">
+                <p>Cancelled</p>
+                <h3 id="cancelledBookings">2</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter and Search Options -->
+    <div class="filter-search">
+        <input type="date" id="filterDateStart" placeholder="Start Date">
+        <input type="date" id="filterDateEnd" placeholder="End Date">
+        <select id="filterStatus">
+            <option value="">All Statuses</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+        </select>
+        <input type="text" id="searchVehicle" placeholder="Search by Vehicle Type">
+        <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Booking List -->
+    <div class="booking-list" id="recentBookingsList">
+        <!-- Sample Booking Entry -->
+        <div class="booking-card">
+            <div class="booking-info">
+                <h3>Booking ID: #001234</h3>
+                <p>Vehicle: Honda City</p>
+                <p>Pickup Date: 2024-11-10</p>
+                <p>Return Date: 2024-11-15</p>
+                <p>Status: <span class="status upcoming">Upcoming</span></p>
+            </div>
+            <div class="booking-actions">
+                <button class="view-btn" onclick="viewBookingDetails('booking1')">View Details</button>
+                <button class="modify-btn" onclick="modifyBooking()">Modify</button>
+                <button class="cancel-btn" onclick="cancelBooking()">Cancel</button>
+                <button class="feedback-btn" onclick="openFeedbackForm()">Leave Feedback</button>
+            </div>
+        </div>
+
+        <div class="booking-card">
+            <div class="booking-info">
+                <h3>Booking ID: #001234</h3>
+                <p>Vehicle: Honda City</p>
+                <p>Pickup Date: 2024-11-10</p>
+                <p>Return Date: 2024-11-15</p>
+                <p>Status: <span class="status upcoming">Upcoming</span></p>
+            </div>
+            <div class="booking-actions">
+                <button class="view-btn" onclick="viewBookingDetails('booking1')">View Details</button>
+                <button class="modify-btn" onclick="modifyBooking()">Modify</button>
+                <button class="cancel-btn" onclick="cancelBooking()">Cancel</button>
+                <button class="feedback-btn" onclick="openFeedbackForm()">Leave Feedback</button>
+            </div>
+        </div>
+
+        <div class="booking-card">
+            <div class="booking-info">
+                <h3>Booking ID: #001234</h3>
+                <p>Vehicle: Honda City</p>
+                <p>Pickup Date: 2024-11-10</p>
+                <p>Return Date: 2024-11-15</p>
+                <p>Status: <span class="status upcoming">Upcoming</span></p>
+            </div>
+            <div class="booking-actions">
+                <button class="view-btn" onclick="viewBookingDetails('booking1')">View Details</button>
+                <button class="modify-btn" onclick="modifyBooking()">Modify</button>
+                <button class="cancel-btn" onclick="cancelBooking()">Cancel</button>
+                <button class="feedback-btn" onclick="openFeedbackForm()">Leave Feedback</button>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="feedback-modal" id="feedbackModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeFeedbackModal()">&times;</span>
+            <h2>Rate Your Experience</h2>
+            <div class="rating-stars" id="ratingStars">
+                <span onclick="rate(1)">☆</span>
+                <span onclick="rate(2)">☆</span>
+                <span onclick="rate(3)">☆</span>
+                <span onclick="rate(4)">☆</span>
+                <span onclick="rate(5)">☆</span>
+            </div>
+            <textarea id="feedbackText" placeholder="Write your feedback here..."></textarea>
+            <button class="submit-feedback" onclick="submitFeedback()">Submit</button>
+        </div>
+    </div>
+</div>
+
+  <!-- Scroll-to-top arrow -->
+  <div id="scrollToTop" class="scroll-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+      
+  
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <h3>WheelXpress</h3>
+        </div>
+        <div class="footer-links">
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <ul>
+                <li><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 WheelXpress. All rights reserved.</p>
+    </div>
+  </footer>
+  
+
+<script src="script.js"></script>
+</body>
+</html>

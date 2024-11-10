@@ -1,0 +1,160 @@
+
+/* Popup Container */
+.booking-popup {
+
+    position: fixed;
+    top: 100px;
+    margin-left:50px;
+    width: 90%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    max-width: 100%;
+    display: none; /* Initially hidden */
+}
+
+/* Popup Header */
+.booking-header h2 {
+    text-align: center;
+    /* color: #023047; */
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #219ebc;
+}
+
+/* Booking Cards */
+.booking-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.booking-card {
+    flex: 1;
+    background-color: white;
+    border: 4px solid #219ebc;
+    border-style: dashed;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card-icon img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.booking-card h3 {
+    color: #219ebc;
+    margin-bottom: 10px;
+}
+
+.booking-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* City Image Section */
+.city-image {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.city-image img {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.city-image p {
+    position: absolute;
+    bottom: 0px;
+    left: 100px;
+    width: 45%;
+    /* left: 140px; */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+
+}
+
+.city-image p:hover{
+    background-color: rgba(0,0,0,0.3);
+}
+
+.go-freedo-btn{
+    text-align: center;
+    margin-left: 620px;
+}
+
+
+/* Buttons */
+.change-city-btn,
+.change-date-btn,
+.duration-btn,
+.reset-btn,
+.go-freedo-btn {
+    background-color: #219ebc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.change-city-btn:hover,
+.change-date-btn:hover,
+.duration-btn:hover,
+.reset-btn:hover,
+.go-freedo-btn:hover {
+    background-color: #023047;
+}
+
+.duration-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.duration-btn {
+    font-size: 14px;
+}
+
+/* Close Button */
+.close-popup {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+    background-color: transparent;
+    font-size: 50px;
+    cursor: pointer;
+    border: none;
+    color: red;
+}
+
+.close-popup:hover {
+    color:rgb(254, 137, 137);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .booking-content {
+        flex-direction: column;
+    }
+    
+    .duration-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

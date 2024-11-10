@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Panel Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script> -->
+
+
+
+    <!-- FontAwesome Icons -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> --> 
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="navbar-container">
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <i class="fas fa-user-cog"></i>
+                <span>Manager Panel</span>
+
+            </div>
+            <ul class="nav-links">
+                <li><a href="#dash"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="submenu">
+                    <a href="#manageBike"><i class="fas fa-motorcycle"></i> Add/Manage Vehicles<i
+                            class="fas fa-caret-down"></i></a> <br>
+                    <ul class="dropdown">
+                        <li><a href="#manageBike">Add Vehicle</a></li>
+                        <li><a href="#manageBike">Manage Vehicle</a></li>
+                    </ul>
+
+                </li>
+                <li class="submenu">
+                    <a href="#generateReport"><i class="fas fa-chart-bar"></i> Reports <i class="fas fa-caret-down"></i>
+                    </a> <br>
+                    <ul class="dropdown">
+                        <li><a href="#generateReport">Generate Report</a></li>
+                        <li><a href="#generateReport">View Analytics</a></li>
+                    </ul>
+                </li>
+                <li><a href="#damageFineReportSection"><i class="fa-solid fa-gears"></i> Damaged & Fine Report</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class="main-content" id="dash">
+        <h1 class="dashboard-title">Admin Dashboard</h1>
+
+        <!-- Cards Section -->
+        <div class="dashboard-cards">
+            <div class="card total-bikes">
+                <div class="card-icon">
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Total Bikes</h3>
+                    <p>150</p>
+                </div>
+            </div>
+            <div class="card total-rentals">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Total Rentals</h3>
+                    <p>3,200</p>
+                </div>
+            </div>
+            <div class="card available-bikes">
+                <div class="card-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Available Bikes</h3>
+                    <p>40</p>
+                </div>
+            </div>
+            <div class="card damaged-bikes">
+                <div class="card-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Damaged Bikes</h3>
+                    <p>10</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graph Section -->
+        <!-- <div class="dashboard-graphs">
+            <div class="graph chart-rentals">
+                <canvas id="rentalsChart"></canvas>
+            </div>
+            <div class="graph chart-revenue">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div> -->
+        <div class="dashboard-container">
+            <!-- Graph Section -->
+            <div class="dashboard-graphs">
+                <div class="graph chart-rentals">
+                    <canvas id="rentalsChart"></canvas>
+                </div>
+                <div class="graph chart-revenue">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Circular Data Cards Section -->
+            <div class="circular-data-cards">
+                <!-- Earned Money Card -->
+                <div class="data-card">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="card-info">
+                        <p>Total Earned</p>
+                        <h3>$25,024</h3>
+                        <p>Last 24 Hours</p>
+                        <div class="circular-loader" data-percentage="80"></div>
+                    </div>
+                </div>
+
+                <!-- Vehicles Rented Card -->
+                <div class="data-card">
+                    <div class="icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="card-info">
+                        <p>Vehicles Rented</p>
+                        <h3>45 Vehicles</h3>
+                        <p>Rented Today</p>
+                        <div class="circular-loader" data-percentage="90"></div>
+                    </div>
+                </div>
+
+                <!-- Active Users Card -->
+                <div class="data-card">
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-info">
+                        <p>Active Users</p>
+                        <h3>1,200 Users</h3>
+                        <p>Online Now</p>
+                        <div class="circular-loader" data-percentage="75"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="manageBike" class="tab-content">
+            <h2>Manage Vehicles</h2>
+            <form id="addBikeForm">
+                <label for="vehicleType">Vehicle Type:</label>
+                <select id="vehicleType">
+                    <option value="Bike">Bike</option>
+                    <option value="Scooty">Scooty</option>
+                    <option value="Car">Car</option>
+                </select>
+
+                <label for="bikeName">Name:</label>
+                <input type="text" id="bikeName" required>
+
+                <label for="bikeImage">Image:</label>
+                <input type="file" id="bikeImage" accept="image/*" required>
+
+                <div id="preview" style="display: none;">
+                    <h3>Preview:</h3>
+                    <img id="previewImage" alt="Preview" width="100">
+                    <p>Type: <span id="previewType"></span></p>
+                    <p>Name: <span id="previewName"></span></p>
+                    <p>Price: <span id="previewPrice"></span></p>
+                    <p>Seater: <span id="previewSeater"></span></p>
+                    <p>Transmission: <span id="previewTransmission"></span></p>
+                    <p>Fuel: <span id="previewFuel"></span></p>
+                    <p>Stock: <span id="previewStock"></span></p>
+                </div>
+
+                <label for="bikePrice">Price:</label>
+                <input type="number" id="bikePrice" required>
+
+                <label for="seater">Seater:</label>
+                <select id="seater">
+                    <option value="2">2 Seater</option>
+                    <option value="5">5 Seater</option>
+                </select>
+
+                <label for="transmission">Transmission:</label>
+                <select id="transmission">
+                    <option value="Manual">Manual</option>
+                    <option value="Automatic">Automatic</option>
+                </select>
+
+                <label for="fuel">Fuel Type:</label>
+                <select id="fuel">
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                </select>
+
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" required>
+
+                <button type="submit">Add Vehicle</button>
+            </form>
+
+            <table id="bikeTable">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Seater</th>
+                        <th>Transmission</th>
+                        <th>Fuel Type</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bike</td>
+                        <td>TVS Apache RTR 160 BS6</td>
+                        <td><img src="/photos/TVS Apache RTR 160 BS6.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>750 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bike</td>
+                        <td>Royal Enfield Bullet Standard 500</td>
+                        <td><img src="/photos/Royal Enfield Bullet Standard 500.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>1100 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bike</td>
+                        <td>Bajaj Pulsar 200 NS</td>
+                        <td><img src="/photos/Bajaj Pulsar 200 NS.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>600 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Bike</td>
+                        <td>Bajaj Avenger Street 220</td>
+                        <td><img src="/photos/Bajaj Avenger Street 220.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>1000 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bike</td>
+                        <td>Bajaj Pulsar 220</td>
+                        <td><img src="/photos/Bajaj Pulsar 220.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>1000 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Scooty</td>
+                        <td>Honda Activa 5G</td>
+                        <td><img src="/photos/Honda Activa 5G.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>400 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Scooty</td>
+                        <td>Suzuki Access 125</td>
+                        <td><img src="/photos/Suzuki Access 125.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>650 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bike</td>
+                        <td>Royal Enfield Himalayan</td>
+                        <td><img src="/photos/Royal Enfield Himalayan.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>1800 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Scooty</td>
+                        <td>TVS Jupiter Classic</td>
+                        <td><img src="/photos/TVS Jupiter Classic.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>599 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Bike</td>
+                        <td>Suzuki Intruder</td>
+                        <td><img src="/photos/Suzuki Intruder.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>1069 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bike</td>
+                        <td>Honda CBR 250R</td>
+                        <td><img src="/photos/Honda CBR 250R.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>200 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bike</td>
+                        <td>TVS Jupiter</td>
+                        <td><img src="/photos/TVS Jupiter.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>399 / Day</td>
+                        <td>2</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Car</td>
+                        <td>Maruti ertiga</td>
+                        <td><img src="/photos/Maruti ertiga.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>1946 / Day</td>
+                        <td>7</td>
+                        <td>Manual</td>
+                        <td>Diesel</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>Tata safari</td>
+                        <td><img src="/photos/Tata safari.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>2345 / Day</td>
+                        <td>7</td>
+                        <td>Manual</td>
+                        <td>Diesel</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>Toyota innova</td>
+                        <td><img src="/photos/Toyota innova.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>2895 / Day</td>
+                        <td>7</td>
+                        <td>Manual</td>
+                        <td>Diesel</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Car</td>
+                        <td>Hyundai i20</td>
+                        <td><img src="/photos/Hyundai i20.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>2581 / Day</td>
+                        <td>5</td>
+                        <td>Manual</td>
+                        <td>Diesel</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>KIA Sonet</td>
+                        <td><img src="/photos/KIA Sonet.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>3289 / Day</td>
+                        <td>5</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>Maruti Dzire</td>
+                        <td><img src="/photos/Maruti Dzire.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>3289 / Day</td>
+                        <td>7</td>
+                        <td>Automatic</td>
+                        <td>Petrol</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Car</td>
+                        <td>Toyota Glanza</td>
+                        <td><img src="/photos/Toyota Glanza.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>3289 / Day</td>
+                        <td>5</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>Toyota Innova Crysta</td>
+                        <td><img src="/photos/Toyota Innova Crysta.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>4346 / Day</td>
+                        <td>7</td>
+                        <td>Manual</td>
+                        <td>Diesel</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>Hyundai i10 Grand</td>
+                        <td><img src="/photos/Hyundai i10 Grand.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>1811 / Day</td>
+                        <td>5</td>
+                        <td>Manual</td>
+                        <td>Diesel</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Car</td>
+                        <td>Maruti Baleno</td>
+                        <td><img src="/photos/Maruti Baleno.jpg" alt="Honda CB Shine" width="100"></td>
+                        <td>3194 / Day</td>
+                        <td>5</td>
+                        <td>Manual</td>
+                        <td>Petrol</td>
+                        <td>10</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>Ford Ecosport</td>
+                        <td><img src="/photos/Ford Ecosport.jpg" alt="TVS Jupiter" width="100"></td>
+                        <td>3387 / Day</td>
+                        <td>5</td>
+                        <td>Manual</td>
+                        <td>Diesel</td>
+                        <td>15</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Car</td>
+                        <td>Mahindra Scorpio</td>
+                        <td><img src="/photos/Mahindra Scorpio.jpg" alt="Toyota Corolla" width="100"></td>
+                        <td>5455 / Day</td>
+                        <td>7</td>
+                        <td>Automatic</td>
+                        <td>Diesel</td>
+                        <td>5</td>
+                        <td>
+                            <button onclick="editBike(this)">Edit</button>
+                            <button onclick="removeBike(this)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+        <div id="generateReport">
+            <h2>Generate Report</h2>
+            <form id="reportForm">
+                <label for="reportType">Select Report Type:</label>
+                <select id="reportType">
+                    <option value="rentals">Rental Report</option>
+                    <option value="revenue">Revenue Report</option>
+                    <option value="vehicleUsage">Vehicle Usage Report</option>
+                </select>
+
+                <label for="dateRange">Select Date Range:</label>
+                <input type="date" id="startDate"> to
+                <input type="date" id="endDate">
+
+                <button type="button" onclick="generateReport()">Generate Report</button>
+            </form>
+
+            <div id="reportOutput" style="display: none;">
+                <h3>Report Preview</h3>
+                <p>Your report will appear here.</p>
+            </div>
+        </div>
+
+
+        <div id="viewAnalytics">
+            <h2>View Analytics</h2>
+            <div class="analyticsGrid">
+                <div class="analyticsCard">
+                    <h3>Total Rentals</h3>
+                    <p>2450</p>
+                </div>
+                <div class="analyticsCard">
+                    <h3>Revenue</h3>
+                    <p>$135,000</p>
+                </div>
+                <div class="analyticsCard">
+                    <h3>Popular Vehicle</h3>
+                    <p>Honda CB Shine</p>
+                </div>
+                <div class="analyticsCard">
+                    <h3>Fuel Preference</h3>
+                    <p>Petrol</p>
+                </div>
+            </div>
+        </div>
+
+
+        <button id="downloadPdf" style="display: none;" onclick="downloadReportAsPDF()">Download Report as PDF</button>
+
+        <button id="exportCsv" style="display: none;" onclick="exportReportAsCSV()">Export as CSV</button>
+
+        <div id="quickDates">
+            <button onclick="setQuickDateRange(7)">Last 7 Days</button>
+            <button onclick="setQuickDateRange(30)">Last 30 Days</button>
+        </div>
+
+
+        <div id="chartContainer">
+            <h3>Bikes</h3>
+            <canvas id="bikeChart" width="400" height="200"></canvas>
+
+            <h3>Car</h3>
+            <canvas id="carChart" width="400" height="200"></canvas>
+        </div>
+
+
+
+        <div id="damageFineReportSection">
+            <h2>Damaged and Fine Report</h2>
+
+
+            <!-- Summary of Reports -->
+            <div class="report-summary">
+                <div class="summary-card">
+                    <h3>Total Damaged Vehicles</h3>
+                    <p id="totalDamaged">15</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Fines Issued</h3>
+                    <p id="totalFines">$1,200</p>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <input type="text" id="searchDamaged" placeholder="Search Damaged Vehicles..."
+                    onkeyup="filterDamagedVehicles()">
+                <input type="text" id="searchFines" placeholder="Search Fines..." onkeyup="filterFines()">
+            </div>
+
+            <div class="sort-section">
+                <button onclick="sortTable('damaged', 0)">Sort by ID</button>
+                <button onclick="sortTable('damaged', 3)">Sort by Cost</button>
+                <button onclick="sortTable('fines', 2)">Sort by Fine Amount</button>
+                <button onclick="exportToCSV('damaged')">Export Damaged Report to CSV</button>
+                <button onclick="exportToCSV('fines')">Export Fines Report to CSV</button>
+            </div>
+
+
+
+            <!-- Damaged Vehicles Report -->
+            <section class="report-section">
+                <h3>Damaged Vehicles Report</h3>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Vehicle ID</th>
+                            <th>Vehicle Type</th>
+                            <th>Damage Description</th>
+                            <th>Severity</th>
+                            <th>Status</th>
+                            <th>Estimated Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody id="damagedVehiclesBody">
+                        <!-- Damaged vehicle entries will be dynamically added here -->
+                        <tr>
+                            <td>B123</td>
+                            <td>Bike</td>
+                            <td>Scratched fender</td>
+                            <td class="severity-low">Low</td>
+                            <td class="status-resolved">Resolved</td>
+                            <td>$50</td>
+                            <td><button onclick="editDamaged('${vehicle.id}')">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>C456</td>
+                            <td>Car</td>
+                            <td>Broken headlight</td>
+                            <td class="severity-medium">Medium</td>
+                            <td class="status-pending">Pending</td>
+                            <td>$150</td>
+                            <td><button onclick="editDamaged('${vehicle.id}')">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>S789</td>
+                            <td>Scooty</td>
+                            <td>Dented body</td>
+                            <td class="severity-high">High</td>
+                            <td class="status-pending">Pending</td>
+                            <td>$300</td>
+                            <td><button onclick="editDamaged('${vehicle.id}')">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Fines and Violations Report -->
+            <section class="report-section">
+                <h3>Fines and Violations</h3>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Vehicle ID</th>
+                            <th>Vehicle Type</th>
+                            <th>Violation Type</th>
+                            <th>Fine Amount</th>
+                            <th>Date Issued</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="finesViolationsBody">
+                        <!-- Fine entries will be dynamically added here -->
+                        <tr>
+                            <td>B123</td>
+                            <td>Bike</td>
+                            <td>Late return</td>
+                            <td>$25</td>
+                            <td>2024-10-25</td>
+                            <td class="status-resolved">Paid</td>
+                            <td><button onclick="editDamaged('${vehicle.id}')">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>C456</td>
+                            <td>Car</td>
+                            <td>Traffic violation</td>
+                            <td>$100</td>
+                            <td>2024-10-30</td>
+                            <td class="status-unpaid">Unpaid</td>
+                            <td><button onclick="editDamaged('${vehicle.id}')">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>S789</td>
+                            <td>Scooty</td>
+                            <td>Parking violation</td>
+                            <td>$50</td>
+                            <td>2024-11-02</td>
+                            <td class="status-resolved">Paid</td>
+                            <td><button onclick="editDamaged('${vehicle.id}')">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+
+    </div>
+
+    <!-- Scroll-to-top arrow -->
+    <div id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
